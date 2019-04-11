@@ -1,0 +1,37 @@
+{% load bootstrap4 %}
+
+<!doctype html>
+<html lang="en">
+<head>
+     <title>Test Bootstrap DatePicker </title>
+     <meta charset="utf-8">
+     {% bootstrap_css %}
+     {% bootstrap_javascript jquery='full' %}
+</head>
+<body>
+
+<div class="container">
+
+    <h1> Django DatePicker Demo</h1>
+
+    {# Display a form #}
+
+    <form method="post" class="form" action="">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+
+        {% buttons %}
+            <button type='submit' class="btn btn-primary">Submit</button>
+        {% endbuttons %}
+
+    </form>
+
+</div>
+
+{{ form.media }}
+
+
+</body>
+</html>
+
