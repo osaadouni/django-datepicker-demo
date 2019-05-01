@@ -12,3 +12,11 @@ class ToDoForm(forms.Form):
     )
 
 
+class CommentForm(forms.Form):
+    name = forms.CharField(label='Your name')
+    url = forms.URLField(label='Your website', required=False)
+    comment = forms.CharField()
+
+
+
+

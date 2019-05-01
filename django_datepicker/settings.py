@@ -40,7 +40,11 @@ INSTALLED_APPS = [
      
     'bootstrap4',
     'bootstrap_datepicker_plus',
+
+    # local
     'myapp',
+    'users.apps.UsersConfig',
+    'djangobin',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +62,7 @@ ROOT_URLCONF = 'django_datepicker.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,3 +128,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
+AUTH_USER_MODEL = 'users.CustomUser'
+
+
+# login/logout redirect urls
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
