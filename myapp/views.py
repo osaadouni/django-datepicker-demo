@@ -3,14 +3,26 @@ from django.http import (
     HttpResponseRedirect, HttpResponsePermanentRedirect, HttpResponseNotFound,
     HttpResponseBadRequest, HttpResponseForbidden, HttpResponseServerError
 )
+import datetime
 
 from .forms import ToDoForm
+
 
 # Create your views here.
 def show_demo(request):
     form = ToDoForm()
     return render(request, 'myapp/my_template.html', {'form': form})
 
+def index(request):
+    post = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu lectus ut lacus posuere fringilla id eu turpis"
+    content = '''\
+    this is
+    
+    a test
+    '''
+    my_code = "<p>this is a short para. <script>alert('hoi');</script> </p>"
+    now = datetime.datetime.now()
+    return render(request, 'myapp/index.html', {'name': 'Tom Sawyer', 'post': post, 'long_text': post, 'num':10, 'now': now, 'content': content, 'my_code': my_code})
 
 def handle_post(request):
     post_id = 1

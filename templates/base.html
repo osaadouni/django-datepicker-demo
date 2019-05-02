@@ -5,9 +5,22 @@
     <title>{%  block title %}Django Auth Tutorial{%  endblock %}</title>
 </head>
 <body>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+        <a href="#">Career</a>
+    </nav>
     <main>
         {%  block content %}
         {% endblock %}
+
+        <hr>
+
+        {% block footer %}
+            <p>Create Commons Attributions 4.0 International License</p>
+        {% endblock footer %}
+
     </main>
 
 </body>

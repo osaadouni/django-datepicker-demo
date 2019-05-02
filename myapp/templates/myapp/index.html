@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{{ name|lower }} <br>
+{{ name|upper }} <br>
+{{ name|title }} <br>
+{{ name|lower|capfirst }} <br>
+{{ name.capitalize }} <br>
+<p>The length variable name is {{ name|length }}</p>
+<p>post: {{ post }} </p>
+<p>truncated post: {{ post|truncatewords:"10" }}</p>
+<p>truncated chars: {{ post|truncatechars:"10" }}</p>
+<p>You have {{ num }} product{{ num|pluralize }} in your cart</p>
+<p>You have {{ num }} tomato{{ num|pluralize:"es" }} in your cart</p>
+<p>You have {{ num }} diar{{ num|pluralize:"y,ies" }} in your cart</p>
+<p>You have {{ num }} bab{{ num|pluralize:"y,ies" }} in your cart</p>
+<p>Today is {{ now|date:"D d M Y" }}</p>
+<p>Today is {{ now|date:"Y-m-d H:i:s" }}</p>
+{{ content|linebreaks }}
+{{ content|linebreaksbr }}
+
+<p>
+my_code:
+{{ my_code }}
+</p>
+
+<p> safe:
+    {{ my_code|safe }}</p>
+
+<p> autoescape on:
+{% autoescape on %}
+    {{ my_code }}
+{% endautoescape %}
+</p>
+
+<p>autoescape off:
+{% autoescape off %}
+{{ my_code }}
+{% endautoescape %}
+</p>
+
+</body>
+</html>

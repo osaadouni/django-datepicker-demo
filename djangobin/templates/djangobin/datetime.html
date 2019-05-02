@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{# This is a comment #}
+
+{# Check the existence of now variable in the template using if tag #}
+
+{% comment %}
+this is another
+multiline comment
+{% endcomment %}
+
+{% if now %}
+    <p>Current date and time is {{ now }}</p>
+{% else %}
+    <p>now variable is not available</p>
+{% endif %}
+
+<p>Current scheme: {{ request.scheme }}</p>
+
+<p>BASE_DIR: {{ base_dir }}</p>
+
+{% endblock content %}
+
+
