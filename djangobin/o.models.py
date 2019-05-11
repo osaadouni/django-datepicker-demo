@@ -2,13 +2,9 @@ import time
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
-from django.dispatch import receiver
-from django.db.models.signals import post_save
 from pygments import lexers, highlight
 from pygments.formatters import HtmlFormatter, ClassNotFound
 
-
-from users.models import CustomUser
 from .utils import Preference as Pref
 
 
@@ -52,7 +48,7 @@ def get_default_language():
 
 
 class Author(models.Model):
-    user = models.OneToOneField('users.CustomUser', on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     default_language = models.ForeignKey(Language, on_delete=models.CASCADE,
                                          default=get_default_language())
     default_exposure = models.CharField(max_length=10, choices=Pref.exposure_choices,
@@ -61,7 +57,7 @@ class Author(models.Model):
                                           default=Pref.SNIPPET_EXPIRE_NEVER)
 
     private = models.BooleanField(default=False)
-    views = models.IntegerField(default=0)
+    views = models.IntegerField()
 
     def __str__(self):
         return self.user.username
@@ -73,10 +69,6 @@ class Author(models.Model):
         return self.user.snippet_set.count()
 
 
-@receiver(post_save, sender=CustomUser)
-def create_author(sender, **kwargs):
-    if kwargs.get('created', False):
-        Author.objects.get_or_create(user=kwargs.get('instance'))
 
 
 class Snippet(models.Model):
@@ -92,8 +84,7 @@ class Snippet(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
 
     language = models.ForeignKey(Language, on_delete=models.CASCADE, related_name='snippets')
-    #author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='snippets')
-    user = models.OneToOneField('users.CustomUser', on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='snippets')
     tags = models.ManyToManyField('Tag', blank=True, related_name='snippets')
 
     class Meta:
